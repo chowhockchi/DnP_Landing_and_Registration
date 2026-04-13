@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抢占免费席位 | DnP Education Centre</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="reg-body page-enter">
+
+    <header class="reg-header">
+        <nav class="back-nav">
+            <a href="index.html">← 返回主页</a>
+        </nav>
+        
+        <h2>抢占免费席位</h2>
+        <p>SPM Addmaths 重塑计划</p>
+    </header>
+
+    <main class="reg-main">
+        <form name="submit-to-google-sheet" class="reg-form">
+            
+            <div class="input-group">
+                <label for="name">学生真实姓名 (Full Name)</label>
+                <input type="text" id="name" name="name" placeholder="请输入您的英文名字" required>
+            </div>
+
+            <div class="input-group">
+                <label for="grade">年级 (Grade)</label>
+                <select id="grade" name="grade" required>
+                    <option value="" disabled selected>请选择您的年级</option>
+                    <option value="F4">Form 4</option>
+                    <option value="F5">Form 5</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="whatsapp">WhatsApp 电话号码</label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="+60 1x-xxxxxxx" required>
+                <small>用于发送免费 Seminar 链接与独家讲义</small>
+            </div>
+
+            <button type="submit" class="submit-btn">立即锁定免费名额！</button>
+        </form>
+    </main>
+
+    <footer class="reg-footer">
+        <p>🔒 您的个人隐私将被严密保护，绝不泄露。</p>
+    </footer>
+
+    <div class="transition-curtain"></div>
+
+    <script>
+        // 把这里换成你刚才在 Google 复制的 Web App URL ！！！
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz-AssJ0kQ716Uj74jyfBOgnK_sbHJGYh0tCiR_GAq21ir4E_b1xdgbI64ZR9MatBrJaw/exec';
+        
+        const form = document.forms['submit-to-google-sheet'];
+        const submitBtn = document.querySelector('.submit-btn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault(); // 站住！拦截默认的刷新提交
+            
+            // 把按钮文字变成提交中，防止小可怜们手抖点两下
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = '正在注入数据库...';
+            submitBtn.disabled = true;
+
+            // 魔法开始：把数据打包发送给 Google
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    console.log('Success!', response);
+                    // 数据发送成功后，拉起藏蓝幕布！
+                    document.body.classList.add('page-exit-active');
+                    
+                    // 等幕布拉起（600ms）后，切去成功页面
+                    setTimeout(() => {
+                        window.location.href = 'success.html';
+                    }, 600);
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert('哎呀，发送失败了，是不是你网络断了？');
+                    submitBtn.innerText = originalText;
+                    submitBtn.disabled = false;
+                });
+        });
+    </script>
+</body>
+</body>
+</html>

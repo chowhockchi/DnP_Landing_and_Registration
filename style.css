@@ -1,0 +1,604 @@
+/* 🎓 DnP Education Centre - Ultimate Integrated Theme */
+
+/* =========================================
+   1. 全局变量 (由本天才亲自校准) 
+   ========================================= */
+:root {
+    --bg-cream: #F9F8F4;      /* 象牙白 */
+    --navy-blue: #14284B;     /* 深海藏蓝 (UM 学霸色) */
+    --gold-accent: #B8965B;   /* 古典雅金 */
+    --text-dark: #2C3E50;     /* 专业深灰 */
+    --white: #FFFFFF;
+}
+
+/* =========================================
+   2. 基础重置 (别乱动这部分，dummy!)
+   ========================================= */
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-cream);
+    color: var(--text-dark);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.8;
+}
+
+/* =========================================
+   3. 顶部区域 & 预留位置
+   ========================================= */
+/* =========================================
+   3. 顶部区域 & 带视差滚动的极品 Banner
+   ========================================= */
+header {
+    position: relative;
+
+    background-color: var(--navy-blue);
+    
+    /* 魔法纠正：遮罩必须在前，图片必须在后！别再搞反了笨蛋！ */
+    background-image: 
+        linear-gradient(rgba(20, 40, 75, 0.75), rgba(20, 40, 75, 0.9)), 
+        url('images/banner_img.jpg');
+        
+    /* 配合背景图的必备三件套 */
+    background-size: cover;            /* 让图片完美铺满 */
+    background-position: center;       /* 让图片居中显示 */
+    background-repeat: no-repeat;      /* 严禁图片像瓷砖一样重复 */
+    
+    /* 你梦寐以求的 fixed 效果，必须单独写在这里！ */
+    background-attachment: fixed;      
+    
+    color: var(--white);
+    text-align: center;
+    padding: 100px 100px 205px; /* 把内边距撑大，Banner 才有气势 */
+    border-bottom: 6px solid var(--gold-accent);
+}
+
+/* =========================================
+   本天才特调：会跳动的下滑箭头
+   ========================================= */
+.scroll-down {
+    position: absolute;
+    bottom: 0px; /* 距离底部的高度 */
+    left: 50%; /* 水平居中第一步 */
+    transform: translateX(-50%); /* 水平居中第二步，别问为什么，照做！ */
+    font-size: 2.5rem; /* 箭头大小 */
+    color: var(--gold-accent);
+    text-decoration: none;
+    animation: bounce 2s infinite; /* 绑定跳动动画，无限循环 */
+    transition: opacity 0.3s ease;
+    z-index: 10; /* 确保它不会被背景吃掉 */
+}
+
+.arrow-img {
+    width: 155px; /* 🪄 就是这个！觉得太大就改成 35px，觉得太小就改成 55px，自己去调！ */
+    height: auto; /* 高度必须设置自动，不然你的圆圈会被拉成椭圆形的畸形儿！ */
+    
+    /* 顺便把高贵的跳动动画也给这张图片装上，不用谢！ */
+    animation: premium-bounce 2s infinite ease-in-out; 
+    transition: opacity 0.3s ease;
+}
+
+.arrow-img:hover {
+    opacity: 0.7; /* 鼠标放上去变暗一点的高级互动感 */
+}
+
+/* 赋予灵魂的弹跳动画关键帧 */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translate(-50%, 0);
+    }
+    40% {
+        transform: translate(-50%, -20px); /* 向上跳 20 像素 */
+    }
+    60% {
+        transform: translate(-50%, -10px); /* 轻轻再跳一下 */
+    }
+}
+
+/* 预留给 Logo 的样式 */
+.logo-img {
+    width: 140px;
+    margin: 0 auto 20px;
+    display: block;
+    border-radius: 100px;
+}
+
+#merchant {
+    color: var(--gold-accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    margin-bottom: 100px;
+}
+
+/* =========================================
+   本天才特调：霸气巨无霸字体与护眼阴影
+   ========================================= */
+#slogan {
+    font-size: 4.4rem; /* 从 2.2rem 放大到 3rem，这叫气场！ */
+    line-height: 1.2;
+    margin-bottom: 25px;
+    font-weight: 900; /* 加粗，更有力量感 */
+    /* 魔法：加一层深色阴影，把文字从杂乱的背景里“抠”出来 */
+    text-shadow: 3px 6px 15px rgba(0, 0, 0, 0.85); 
+}
+
+#subtitle {
+    font-weight: 400;
+    font-size: 1.5rem; /* 字号也稍微提一点点 */
+    color: #F8F9FA; /* 颜色调得更白一点，对比度更强 */
+    max-width: 1000px; /* 放宽一点，免得字变大了全挤成一坨 */
+    margin: 0 auto;
+    line-height: 1.8;
+    text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.9); /* 同样加上护眼阴影 */
+}
+
+/* =========================================
+   4. 三列布局核心 (Grid Magic + 本天才的强制排序)
+   ========================================= */
+main {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 痛点、优点、讲师并排 */
+    gap: 30px;
+}
+
+/* 魔法开始：无视 HTML 烂顺序，强行重新排队！ */
+#pain { order: 1; }
+#solution { order: 2; }
+#speaker { order: 3; }
+
+/* 让剩下的“活动详情”乖乖滚去第四个位置，并横跨底部全宽 */
+#event {
+    order: 4; 
+    grid-column: 1 / -1; 
+    margin-top: 20px;
+}
+
+/* =========================================
+   5. 通用卡片样式 (Section Design)
+   ========================================= */
+section {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(20, 40, 75, 0.05);
+    border-top: 4px solid var(--navy-blue);
+    transition: transform 0.3s ease;
+}
+
+section:hover { transform: translateY(-5px); }
+
+/* 强调色区分 */
+#solution, #speaker { border-top-color: var(--gold-accent); }
+
+ul { list-style-type: none; margin-top: 15px; }
+ul li { margin-bottom: 12px; padding-left: 25px; position: relative; }
+ul li::before { content: "•"; position: absolute; left: 0; color: var(--gold-accent); font-weight: bold; }
+
+/* =========================================
+   6. 表格 & 按钮样式
+   ========================================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #EEE;
+}
+
+th, td { padding: 15px; text-align: left; border-bottom: 1px solid #EEE; }
+th { background-color: var(--navy-blue); color: var(--white); width: 20%; }
+
+button#join {
+    background-color: var(--gold-accent);
+    border: none;
+    padding: 20px 50px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+button#join a { color: var(--white); text-decoration: none; font-weight: 700; font-size: 1.2rem; }
+
+/* =========================================
+   7. 底部联系方式
+   ========================================= */
+footer {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.contact-info {
+    margin-top: 30px;
+    font-size: 1rem;
+    color: var(--text-dark);
+    opacity: 0.8;
+}
+
+.contact-info a { color: var(--navy-blue); text-decoration: none; font-weight: bold; }
+
+/* =========================================
+   8. 响应式适配
+   ========================================= */
+@media (max-width: 1024px) {
+    main { grid-template-columns: repeat(2, 1fr); }
+    #speaker { grid-column: 1 / -1; }
+}
+
+@media (max-width: 768px) {
+    main { grid-template-columns: 1fr; }
+    #speaker, #event { grid-column: auto; }
+}
+
+/* =========================================
+   本天才特调：Registration 专属极简样式
+   ========================================= */
+
+.reg-body {
+    background-color: var(--bg-cream);
+    margin: 0;
+    padding: 0;
+    display: block; /* 移除 flex 居中 */
+}
+
+/* 2. 全屏注册页 Header (带 Banner) */
+.reg-header {
+    background-color: var(--navy-blue);
+    color: var(--white);
+    text-align: center;
+    /* 增大上下 padding，营造全屏 Banner 的气势，就像主页 header 一样，但稍微小点 */
+    padding: 120px 20px 100px;
+    border-bottom: 6px solid var(--gold-accent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative; /* 用于返回导航的定位 */
+
+    /* ⬇️ 这里就是你求我加的 Banner，遮罩必须在前，图片必须在后！别再搞反了笨蛋！ ⬇️ */
+    /* background-image: 
+        linear-gradient(rgba(20, 40, 75, 0.75), rgba(20, 40, 75, 0.9)), 
+        url('banner.jpg'); */ /* 把 'banner.jpg' 换成你真正的图片文件名！别照抄！ */
+    /* background-size: cover; */
+    /* background-position: center; */
+    /* background-repeat: no-repeat; */
+    /* background-attachment: fixed; */ /* 視差滾動效果 */
+}
+
+/* 3. 返回导航样式 (移动到 Header 内部定位) */
+.reg-header .back-nav {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.reg-header .back-nav a {
+    color: var(--white); /* 在深色 Header 上使用白色文字 */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.reg-header .back-nav a:hover {
+    opacity: 1;
+}
+
+/* 4. 将卡片顶部文字作为 Header 内容排版 (沿用主页 header 内容样式) */
+.reg-header h2 {
+    font-size: 4rem; /* 从 史诗级字号，镇住全屏 Header，就像主页 slogan 一样 */
+    line-height: 1.2;
+    margin-bottom: 20px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    text-shadow: 3px 6px 15px rgba(0, 0, 0, 0.85);
+}
+
+.reg-header p {
+    font-weight: 400;
+    font-size: 1.4rem; /* 从 副标题也跟着变巨无霸，就像主页 subtitle 一样 */
+    color: #F8F9FA;
+    max-width: 950px;
+    margin: 0 auto;
+    line-height: 1.8;
+    text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* 5. 全屏表单容器 (替代之前的 reg-container 和 registration-card) */
+.reg-main {
+    background-color: var(--white);
+    width: 100%; /* 占满屏幕宽度 */
+    padding: 60px 20px; /* 增加上下 padding，营造空间感 */
+    display: flex; /* 在表单容器内居中表单本身 */
+    justify-content: center;
+    align-items: flex-start; /* 表单靠上排列 */
+}
+
+/* 6. 表单本身的最大宽度限制 (仍然需要，否则全屏太宽) */
+.reg-form {
+    width: 100%;
+    max-width: 480px; /* 限制表单最大宽度，太宽了输入框像面条 */
+    margin: 0 auto;
+}
+
+/* 7. 输入框和提交按钮样式 (沿用之前的卡片内样式) */
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.input-group input, 
+.input-group select {
+    width: 100%;
+    padding: 15px;
+    border: 1.5px solid #E1E5EB;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus, 
+.input-group select:focus {
+    outline: none;
+    border-color: var(--gold-accent);
+    box-shadow: 0 0 0 4px rgba(184, 150, 91, 0.15);
+}
+
+.input-group small {
+    display: block;
+    margin-top: 8px;
+    color: #888;
+    font-size: 0.8rem;
+}
+
+/* 提交按钮 - 绝对统治力 */
+.submit-btn {
+    width: 100%;
+    background-color: var(--navy-blue);
+    color: var(--white);
+    padding: 18px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 6px 15px rgba(20, 40, 75, 0.2);
+}
+
+.submit-btn:hover {
+    background-color: #0E1D36;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(20, 40, 75, 0.3);
+}
+
+/* 8. 全屏页脚样式 */
+.reg-footer {
+    background-color: var(--bg-cream); /* 沿用高级象牙白 */
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid #E1E5EB;
+}
+
+.reg-footer p {
+    font-size: 0.75rem;
+    color: #AAA;
+}
+
+/* =========================================
+   [注册页] 响应式适配 🔥 (新增) 🔥
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 主页 header 的适配保持原样 */
+    #slogan { font-size: 1.8rem; }
+    #subtitle { font-size: 1rem; }
+    header { padding: 40px 15px; }
+
+    /* 全屏注册页适配 */
+    .reg-header { padding: 80px 15px 60px; } /* 手机上头部 padding 缩小 */
+    
+    /* ⬇️ 新增：强制让巨无霸注册标题在手机上乖乖缩小！ */
+    .reg-header h2 { font-size: 2rem; }
+    .reg-header p { font-size: 1.1rem; }
+
+    .reg-main { padding: 40px 15px; } /* 手机上表单 padding 缩小 */
+}
+
+/* =========================================
+   本天才特调：页面过场动画 (Navy Curtain)
+   ========================================= */
+
+/* 1. 页面进入时的平滑上浮动画 (用于 body) */
+.page-enter {
+    animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpFade {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. 页面退出时的“藏蓝幕布” */
+.transition-curtain {
+    position: fixed;
+    bottom: -100vh; /* 初始状态藏在屏幕最下方 */
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--navy-blue); /* 用你的主色调做幕布 */
+    z-index: 99999; /* 保证它盖住所有东西 */
+    transition: bottom 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+/* 触发退场时的状态 */
+.page-exit-active .transition-curtain {
+    bottom: 0; /* 幕布拉起，遮住整个屏幕 */
+}
+
+/* =========================================
+   本天才特调：返回主页的左滑退场动画
+   ========================================= */
+/* 触发往左滑出的状态 */
+.page-exit-left-active {
+    /* 0.5秒的丝滑滑动，不拖泥带水 */
+    animation: slideOutLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 核心魔法：从当前位置，向左平移出整个屏幕 (-100vw) 并渐渐透明 */
+@keyframes slideOutLeft {
+    0% { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+    100% { 
+        transform: translateX(-100vw); 
+        opacity: 0; 
+    }
+}
+
+/* =========================================
+   本天才特调：报名成功 (Thank You) 页面与动画
+   ========================================= */
+
+/* 1. 成功页大容器 */
+.success-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* 2. 成功卡片（自带果冻弹出动画） */
+.success-card {
+    background-color: var(--white);
+    padding: 60px 50px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(20, 40, 75, 0.08);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    border-top: 8px solid var(--gold-accent);
+    
+    /* 魔法：入场时像果冻一样 Q 弹弹出 */
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+@keyframes popIn {
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* 3. 纯 CSS 动态画勾勾 (极度高级，别弄坏了！) */
+.success-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(184, 150, 91, 0.1); /* 淡淡的金色背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 30px;
+}
+
+.success-icon {
+    width: 25px;
+    height: 45px;
+    border-right: 5px solid var(--gold-accent);
+    border-bottom: 5px solid var(--gold-accent);
+    transform: rotate(45deg) translate(-5px, -10px);
+    opacity: 0;
+    /* 延迟 0.4 秒，等卡片弹出来后，再缓慢画出一个金色的勾！ */
+    animation: drawCheck 0.5s ease-out 0.4s forwards;
+}
+
+@keyframes drawCheck {
+    0% { height: 0; width: 0; opacity: 1; }
+    50% { height: 0; width: 25px; opacity: 1; }
+    100% { height: 45px; width: 25px; opacity: 1; }
+}
+
+/* 4. 文字排版 */
+.success-card h2 {
+    color: var(--navy-blue);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.success-message {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+/* 5. 待办事项提醒区 */
+.next-steps {
+    background-color: var(--bg-cream);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: left;
+    margin-bottom: 35px;
+    border: 1px dashed var(--gold-accent); /* 虚线边框，学术感 */
+}
+
+.next-steps h3 {
+    color: var(--navy-blue);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.next-steps ul {
+    margin-top: 0;
+    padding-left: 20px;
+}
+
+.next-steps li {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+/* 6. 返回按钮 */
+.return-home-btn {
+    display: inline-block;
+    background-color: var(--navy-blue);
+    color: var(--white);
+    padding: 16px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(20, 40, 75, 0.2);
+}
+
+.return-home-btn:hover {
+    background-color: #0E1D36;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(20, 40, 75, 0.3);
+}
+
+/* 响应式微调 */
+@media (max-width: 480px) {
+    .success-card { padding: 40px 30px; }
+    .success-card h2 { font-size: 1.8rem; }
+}

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DnP Education Centre 理证学苑</title>
+
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body class="page-enter">
+        <header>
+            <h3 id="merchant">Define & Proof Education Centre</h3>
+            <h2 id="slogan">6个小时带你告别死记硬背！<br>SPM Addmaths稳稳拿下的终极推导法则</h2>
+            <h3 id="subtitle">为什么你刷了上百道题还是卡在瓶颈？因为你根本不懂公式背后的逻辑！加入这场彻底颠覆你数学认知的免费 Seminar，教你用“底层理论与硬核推导”破解每一道变型难题。</h3>
+            <a href="#pain" class="scroll-down"><img src="images/arrow_button_img-removebg-preview.png" alt="scroll down" class="arrow-img"></a>
+        </header>
+
+        <main>
+            <section id="pain">
+                你是不是也受够了这些情况：
+                <ul>
+                    <li>
+                        ❌ 看到长长的微积分公式就头皮发麻，只能死记硬背？
+                    </li>
+                    <li>
+                        ❌ 遇到稍微变型的历年考题，大脑就直接宕机一片空白？
+                    </li>
+                    <li>
+                        ❌ 外面的补习班老师只会教你“怎么套公式”，却从来不讲“为什么”？
+                    </li>
+                    <li>
+                        ❌ 茫茫18课中, 不知道该怎么下手开始学？
+                    </li>
+                </ul>
+            </section>
+            <section id="solution">
+                在这里，我们绝对不搞填鸭式教育。
+                <br>我们玩的是最纯粹的数学推导！我会带你穿透题目的表象，直击底层逻辑。
+                <ul>
+                    <li>
+                        🧠 精准的数学思维模式： 了解公式是怎么被推导出来的，看穿题目的本质，从背公式到说出“Ceh~就这样而已阿？”。
+                    </li>
+                    <li>
+                        🛡️ 无惧任何变型： 掌握纯理论基础，无论考题怎么刁难、陷阱题多么欠打，你都能一眼看穿他们的套路。
+                    </li>
+                    <li>
+                        📈 最有效率的学习计划：给你一个方针，怎么在最短时间内学到快、狠、准！
+                    </li>
+                </ul>
+            </section>
+            <section id="event">
+                📅 【活动详情 / Event Details】
+                <table border="3">
+                    <tr>
+                        <th>日期</th>
+                        <td>8/6/2026 ~ 10/6/2026</tr>
+                    </tr>
+                    <tr>
+                        <th>时间</th>
+                        <td>8:00pm ~ 10:00pm</td>
+                    </tr>
+                    <tr>
+                        <th>地点/平台</th>
+                        <td>Google Meet</td>
+                    </tr>
+                    <tr>
+                        <th>费用</th>
+                        <td>完全免费（名额有限）</td>
+                    </tr>
+                </table><br>
+            </section>
+            <section id="speaker">
+                👤 【讲师简介 / About the Speaker】
+                主讲人：Mr.Chow
+                <ul>
+                    <li>
+                        学术背景： 马来亚大学 (Universiti Malaya) 理学学士 (Bachelor of Science in Mathematics)
+                    </li>
+                    <li>
+                        学术成就： 荣誉斩获 SPM 全 A（Addmaths A+），具备极高的学术标准与严谨的理科思维。
+                    </li>
+                    <li>
+                        教学理念： 拒绝低效的死记硬背与机械式刷题。凭借深厚的纯数学理论根基与强大的逻辑推导能力，Mr.Chow 擅长运用清晰的逻辑思维，深度解构 SPM Add Maths 的底层核心。他将带领学生穿透枯燥的公式表象，培养真正的数学直觉，从根本上粉碎“遇到变型题就大脑空白”的应试痛点。
+                    </li>
+                </ul>
+            </section>
+        </main>
+        <footer>
+            <h4>名额有限，火速报名！</h4>
+            <label>
+                <button type="button" id="join"><a href="registration.html">抢占免费席位!</a></button>
+            </label>
+
+            <div class="contact-info">
+                <p>📞 联系我们: +60 11-2191 4113 (WhatsApp)</p>
+                <p>🌐 Facebook: <a href="https://www.facebook.com/profile.php?id=61588406758604">@Define & Proof Educational Centre 理证学苑</a></p>
+            </div>
+        </footer>
+        <div class="transition-curtain"></div>
+        <script>
+            // 找到你的加入按钮里的 a 标签
+            const joinLink = document.querySelector('#join a');
+            
+            if(joinLink) {
+                joinLink.addEventListener('click', function(e) {
+                    // 1. 阻止它立刻跳转！
+                    e.preventDefault(); 
+                    
+                    // 2. 拿到目标链接地址
+                    const targetUrl = this.getAttribute('href');
+                    
+                    // 3. 给 body 加上退场类名，触发 CSS 幕布拉起动画
+                    document.body.classList.add('page-exit-active');
+                    
+                    // 4. 等待 600 毫秒（也就是动画播放完），再真的跳转过去！
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 600);
+                });
+            }
+        </script>
+  </body>
+</html>

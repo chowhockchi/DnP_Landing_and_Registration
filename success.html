@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报名成功 | DnP Education Centre</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="reg-body page-enter"> 
+
+    <main class="success-container">
+        <div class="success-card">
+            
+            <div class="success-icon-wrapper">
+                <div class="success-icon"></div>
+            </div>
+
+            <h2>席位锁定成功！</h2>
+            <p class="success-message">恭喜你，做出了拯救 Addmaths 成绩的最正确决定。接下来尽情期待即将到来的翻身机会。</p>
+
+            <div class="next-steps">
+                <h3>接下来要做什么？</h3>
+                <ul>
+                    <li>📱 请留意你的 WhatsApp，Mr. Chow 将在 24 小时内亲自发送独家预习讲义。</li>
+                    <li>🗓️ 记得把 Seminar 日期加入你的日历，因为~有些人，一旦错过便不在~</li>
+                </ul>
+            </div>
+
+            <a href="index.html" class="return-home-btn">返回主页</a>
+        </div>
+    </main>
+
+    <div class="transition-curtain"></div>
+
+    <script>
+        const returnBtn = document.querySelector('.return-home-btn');
+        if(returnBtn) {
+            returnBtn.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                const targetUrl = this.getAttribute('href');
+                document.body.classList.add('page-exit-left-active');
+                setTimeout(() => { window.location.href = targetUrl; }, 500);
+            });
+        }
+    </script>
+</body>
+</html>

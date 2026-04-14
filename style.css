@@ -57,7 +57,7 @@ header {
     
     color: var(--white);
     text-align: center;
-    padding: 100px 100px 175px; /* 把内边距撑大，Banner 才有气势 */
+    padding: 100px 100px 135px; /* 把内边距撑大，Banner 才有气势 */
     border-bottom: 6px solid var(--gold-accent);
 }
 
